@@ -6,18 +6,18 @@ services:
   - docker
 
 before_install:
-  - docker build -t blacktongsu/react-test-app -f ./frontend/Dockerfile.dev ./frontend
+  - docker build -t dbwnghs/react-test-app -f ./frontend/Dockerfile.dev ./frontend
 
 script:
-  - docker run -e CI=true blacktongsu/react-test-app npm run test
+  - docker run -e CI=true dbwnghs/react-test-app npm run test
 
 after_success:
-  - docker build -t blacktongsu/docker-frontend ./frontend
-  - docker build -t blacktongsu/docker-backend ./backend
-  - docker build -t blacktongsu/docker-nginx ./nginx
+  - docker build -t dbwnghs/docker-frontend ./frontend
+  - docker build -t dbwnghs/docker-backend ./backend
+  - docker build -t dbwnghs/docker-nginx ./nginx
 
   - echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_ID" --password-stdin
 
-  - docker push blacktongsu/docker-frontend
-  - docker push blacktongsu/docker-backend
-  - docker push blacktongsu/docker-nginx
+  - docker push dbwnghs/docker-frontend
+  - docker push dbwnghs/docker-backend
+  - docker push dbwnghs/docker-nginx
